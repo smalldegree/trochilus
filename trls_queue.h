@@ -45,7 +45,7 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 
 //init a trls_queue
 #define trls_queue_init(h)                                         \
-        (h)->prev = (h);                                               \
+        (h)->prev = (h);                                           \
         (h)->next = (h)
 
 //judge whether a trls_queue is empty
@@ -77,9 +77,9 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 
 //delete the node from a trls_queue
 #define trls_queue_del(q)                                          \
-        (q)->next->prev = (q)->prev;                                   \
-        (q)->prev->next = (q)->next;                                   \
-        (q)->prev = NULL;                                            \
+        (q)->next->prev = (q)->prev;                               \
+        (q)->prev->next = (q)->next;                               \
+        (q)->prev = NULL;                                          \
         (q)->next = NULL
 
 //get the nodes total num for a trls_queue
@@ -104,18 +104,18 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 
 //split trls_queue h into h & n two trls_queues by node q
 #define trls_queue_split(h, q, n)                                  \
-        (n)->prev = (h)->prev;                                         \
-        (n)->prev->next = (n);                                         \
-        (n)->next = (q);                                               \
-        (h)->prev = (q)->prev;                                         \
-        (h)->prev->next = (h);                                         \
+        (n)->prev = (h)->prev;                                     \
+        (n)->prev->next = (n);                                     \
+        (n)->next = (q);                                           \
+        (h)->prev = (q)->prev;                                     \
+        (h)->prev->next = (h);                                     \
         (q)->prev = (n)
 
 //union trls_queue h & n to a trls_queue h
 #define trls_queue_union(h, n)                                     \
-        (h)->prev->next = (n)->next;                                   \
-        (n)->next->prev = (h)->prev;                                   \
-        (h)->prev = (n)->prev;                                         \
+        (h)->prev->next = (n)->next;                               \
+        (n)->next->prev = (h)->prev;                               \
+        (h)->prev = (n)->prev;                                     \
         (n)->prev->next = (h)
 
 //traverse a trls_queue h
@@ -129,30 +129,30 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 
 //insert the node q before the head node, hold 1st position
 #define trls_queue_insert_head(h, q)                               \
-        (q)->next = (h)->next;                                         \
-        (q)->next->prev = (q);                                         \
-        (q)->prev = (h);                                               \
+        (q)->next = (h)->next;                                     \
+        (q)->next->prev = (q);                                     \
+        (q)->prev = (h);                                           \
         (h)->next = (q)
 
 //insert the node q behind the last node, hold last position
 #define trls_queue_insert_tail(h, q)                               \
-        (q)->prev = (h)->prev;                                         \
-        (q)->prev->next = (q);                                         \
-        (q)->next = (h);                                               \
+        (q)->prev = (h)->prev;                                     \
+        (q)->prev->next = (q);                                     \
+        (q)->next = (h);                                           \
         (h)->prev = (q)
 
 //insert the node q before the node p
 #define trls_queue_insert_prev(p, q)                               \
-        (q)->prev = (p)->prev;                                         \
-        (q)->prev->next = (q);                                         \
-        (q)->next = (p);                                               \
+        (q)->prev = (p)->prev;                                     \
+        (q)->prev->next = (q);                                     \
+        (q)->next = (p);                                           \
         (p)->prev = (q)
 
 //insert the node q behind the node p
 #define trls_queue_insert_next(p, q)                               \
-        (q)->next = (p)->next;                                         \
-        (q)->next->prev = (q);                                         \
-        (q)->prev = (p);                                               \
+        (q)->next = (p)->next;                                     \
+        (q)->next->prev = (q);                                     \
+        (q)->prev = (p);                                           \
         (p)->next = (q)
 
 //insert the node q behind the head node, hold 2rd position
