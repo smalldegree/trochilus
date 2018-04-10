@@ -14,7 +14,7 @@ struct trls_queue_s
 typedef struct trls_queue_s trls_queue_t;
 
 
-//trls_queue comparison definition
+//trls_queue comparison fun pt definition
 typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 
 
@@ -32,6 +32,7 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
  * trls_queue_split(h, q, n)
  * trls_queue_union(h, n)
  * trls_queue_tras(pos, h)
+ * trls_queue_pos(h, n)
  * trls_queue_entry(q, type, mem)
  * trls_queue_insert_head(h, q)
  * trls_queue_insert_tail(h, q)
@@ -72,7 +73,8 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 #define trls_queue_next(q)                                         \
         (q)->next
 
-//get the middle node from a trls_queue
+//get the middle node from a trls_queue, if it has odd num nodes,
+//or get the 1st node from a trls_queue's 2rd part otherwise
 //implemented by a function
 
 //delete the node from a trls_queue
@@ -82,7 +84,7 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
         (q)->prev = NULL;                                          \
         (q)->next = NULL
 
-//get the nodes total num for a trls_queue
+//get the total nodes num for a trls_queue
 #define trls_queue_len(h)                                          \
         do                                                         \
         {                                                          \
@@ -122,6 +124,29 @@ typedef trls_int_t (*trls_queue_cmp_pt)(trls_queue_t *m, trls_queue_t *n);
 #define trls_queue_tras(pos, h)                                    \
         for((pos) = (h)->next; (pos) != trls_queue_sentinel(h);    \
             (pos) = (pos)->next)
+
+//get the special position node from a trls_queue
+#define trls_queue_pos(h, pos)                                     \
+        do                                                         \
+        {                                                          \
+            trls_uint_t  i, len;                                   \
+            trls_queue_t *node;                                    \
+                                                                   \
+            i = 0;                                                 \
+            len = trls_queue_len(h);                               \
+                                                                   \
+            if(i >= len)                                           \
+                return NULL;                                       \
+                                                                   \
+            trls_queue_tras(node, h)                               \
+            {                                                      \
+                if(i == pos)                                       \
+                    return node;                                   \
+                                                                   \
+                i++;                                               \
+            }                                                      \
+        }                                                          \
+        while(0)
 
 //get the user data associated with a trls_queue node q
 #define trls_queue_entry(q, type, mem)                             \
