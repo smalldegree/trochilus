@@ -1,2 +1,5 @@
-# trochilus
-A simple and fast c lib for common structures and algorithms.
+Welcome to trochilus.
+
+Trochilus aims to implement common structures and algorithms.
+
+Enjoy trochilus!
