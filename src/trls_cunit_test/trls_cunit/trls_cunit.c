@@ -25,13 +25,13 @@ trls_cunit_registry(void)
 {
     if(CUE_SUCCESS != CU_initialize_registry())
     {
-        printf("trls_cunit_registry error: %d.\n", CU_get_error());
+        printf("trls_cunit registry initialize error: %d.\n", CU_get_error());
         exit(0);
     }
 
     if(NULL == CU_get_registry())
     {
-        printf("trls_cunit_registry failed.\n");
+        printf("trls_cunit get registry failed.\n");
         exit(0);
     }
 
@@ -122,12 +122,12 @@ main(int argc, char **argv)
 
     trls_cunit_registry();
 
+    for(i = 0; i < sizeof(g_trls_cunit_suites) / sizeof(trls_cunit_suite); i++)
+        g_trls_cunit_suites[i]();
+
     CU_set_error_action(CUEA_ABORT);
     CU_set_output_filename(TRLS_CUNIT_RESULT_FILE);
     CU_list_tests_to_file();
-
-    for(i = 0; i < sizeof(g_trls_cunit_suites) / sizeof(trls_cunit_suite); i++)
-        g_trls_cunit_suites[i]();
 
     if(1 == argc)
         trls_cunit_process_basic_mode();
