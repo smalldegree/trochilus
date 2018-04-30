@@ -18,7 +18,7 @@ INC_FILES += -I${TROCHILUS_PATH}/src/module
 
 
 LDFLAGS += -L${TROCHILUS_PATH}
-LDFLAGS += -L${TROCHILUS_PATH}/src/trls_cunit/test/CUnit/Source/.libs
+LDFLAGS += -L${TROCHILUS_PATH}/src/trls_cunit_test/CUnit/Sources/.libs
 
 
 INC_LIBS = -lcunit
