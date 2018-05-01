@@ -14,6 +14,7 @@ extern void trls_cunit_suite_queue_module(void);
 
 typedef void (*trls_cunit_suite)(void);
 
+
 trls_cunit_suite g_trls_cunit_suites[] =
 {
     trls_cunit_suite_queue_module
@@ -138,4 +139,3 @@ main(int argc, char **argv)
 
     return 0;
 }
-

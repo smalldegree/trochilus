@@ -1,6 +1,47 @@
 #include "trls_queue.h"
 
 
+trls_uint_t
+trls_queue_len(trls_queue_t *h)
+{
+    trls_uint_t  len = 0;
+    trls_queue_t *node = NULL;
+
+    node = trls_queue_head(h);
+
+    do
+    {
+        len++;
+        node = node->next;
+    }
+    while(node != trls_queue_sentinel(h));
+
+    return len;
+}
+
+trls_queue_t *
+trls_queue_pos(trls_queue_t *h, trls_uint_t pos)
+{
+    trls_uint_t  i, len;
+    trls_queue_t *node;
+
+    len = trls_queue_len(h);
+
+    if(0 >= len || 0 > pos)
+        return NULL;
+
+    i = 0;
+    trls_queue_tras(node, h)
+    {
+        if(i == pos)
+            return node;
+
+        i++;
+    }
+
+    return NULL;
+}
+
 trls_queue_t *
 trls_queue_middle(trls_queue_t *h)
 {

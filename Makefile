@@ -12,9 +12,10 @@ SO_FLAGS = -shared -fPIC
 STATIC_FLAGS = -static
 
 
-libtrochilus:
-	${CC} ${CFLAGS} ${LDFLAGS} ${INCLUDES} ${SO_FLAGS} -o libtrochilus.so \
-          src/core/trls_queue.c
+libtrochilus: clean
+	${CC} ${CFLAGS} \
+    ${LDFLAGS} ${INCLUDES} ${SO_FLAGS} -o libtrochilus.so \
+    src/core/trls_queue.c
 
 
 clean:
